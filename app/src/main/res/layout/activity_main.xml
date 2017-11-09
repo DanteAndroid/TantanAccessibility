@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.danteandroid.accessibilitydemo.MainActivity">
+
+    <TextView
+        android:id="@+id/tantanState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="探探已安装，点击打开"
+
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="16sp"/>
+
+    <Switch
+        android:id="@+id/likeOrNot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tantanState"
+        android:layout_marginTop="100dp"
+        android:checked="true"
+        android:text="代点喜欢"
+        android:textColor="@android:color/white"
+        android:textOff="不喜欢"/>
+    <Switch
+        android:id="@+id/random"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/likeOrNot"
+        android:layout_marginTop="24dp"
+        android:text="智能选择"
+        android:textColor="@android:color/white"/>
+    <Switch
+        android:id="@+id/notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/random"
+        android:layout_marginTop="24dp"
+        android:checked="true"
+        android:text="开启通知"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="12dp"
+        android:onClick="onClick"
+        android:text="辅助功能"/>
+
+</RelativeLayout>
