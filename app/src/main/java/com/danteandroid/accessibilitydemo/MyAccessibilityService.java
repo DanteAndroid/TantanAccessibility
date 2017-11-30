@@ -40,8 +40,15 @@ public class MyAccessibilityService extends AccessibilityService {
             Log.d(TAG, "onAccessibilityEvent: getRootInActiveWindow is null");
             return;
         }
+        List<AccessibilityNodeInfo> l = info.findAccessibilityNodeInfosByText(Constants.OUT_OF_LIKES);
+        List<AccessibilityNodeInfo> m = info.findAccessibilityNodeInfosByText(Constants.OUT_OF_LIKES_EN);
+        Log.d(TAG, "outof: " + l.size());
+        if (l.size() > 0 || m.size() > 0) {
+            stopService = true;
+            NotificationUtil.removeNotification();
+            return;
+        }
         needLike = SpUtil.getBoolean(Constants.LIKE_OR_NOT, true);
-
         List<AccessibilityNodeInfo> list = info.findAccessibilityNodeInfosByViewId(Constants.LIKE_ID);
         List<AccessibilityNodeInfo> dislikeList = info.findAccessibilityNodeInfosByViewId(Constants.DISLIKE_ID);
         if (list == null || dislikeList == null) {

@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init();
 
+        checkA11y();
+    }
+
+    private void checkA11y() {
         if (!Utils.isAccessibilityOpen()) {
             Toast.makeText(this, "请先在辅助功能里打开探探助手~", Toast.LENGTH_LONG).show();
             new Handler().postDelayed(new Runnable() {
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        checkA11y();
         MyAccessibilityService.stopService = false;
         if (SpUtil.getBoolean(Constants.CREATE_NOTIFICATION, true)) {
             Log.d(TAG, "onStart: createNotification");
@@ -61,8 +66,11 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         likeOrNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SpUtil.save(Constants.LIKE_OR_NOT, b);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean like) {
+                SpUtil.save(Constants.LIKE_OR_NOT, like);
+                if (!like){
+                    Toast.makeText(MainActivity.this, "已切换为代点不喜欢。尽享拒绝快感", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         random.setChecked(SpUtil.getBoolean(Constants.RANDOM));
@@ -129,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDialog() {
         new AlertDialog.Builder(this).setTitle("关于")
-                .setMessage("本版本对应 探探v2.8.5.2，其他版本可能不适用。如有任何建议或问题，请通过支付宝留言反馈")
+                .setMessage("本版本对应探探v2.8.5.2、v2.8.5.3。\n其他版本可能不适用。如有任何建议或问题，请通过支付宝留言反馈")
                 .show();
     }
 
